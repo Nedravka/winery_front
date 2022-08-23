@@ -129,10 +129,9 @@
                     <div>
                       <h3 class="heading mt-3 mb-3 text-dark">{{wine['Название']}}</h3>
                       <p>
-                        {% if category in no_type %}
-                          <br/>
-                        {% else %}
-                          Сорт винограда - {{wine['Сорт']}}<br/>
+                        {% if category not in no_type %}
+                          Сорт винограда - {{wine['Сорт']}}
+                        <br/>
                         {% endif %}
                         <span class="price">{{wine['Цена']}} р.</span>
                       </p>
