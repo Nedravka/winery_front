@@ -129,7 +129,7 @@
                     <div>
                       <h3 class="heading mt-3 mb-3 text-dark">{{wine['Название']}}</h3>
                       <p>
-                        {% if category == no_type %}
+                        {% if category in no_type %}
                           <br/>
                         {% else %}
                           Сорт винограда - {{wine['Сорт']}}<br/>
