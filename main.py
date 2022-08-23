@@ -24,14 +24,17 @@ def get_winery_age(foundation_year):
 if __name__ == '__main__':
 
     load_dotenv()
-    wines_data = os.getenv('WINES_DATA', default='wines_test_data.xlsx')
+    wines_assortment = os.getenv('WINES_ASSORTMENT', default='wines_assortment.xlsx')
     winery_foundation_year = os.getenv('WINERY_FOUNDATION_YEAR', default=1920)
-    wine_category_without_type = os.getenv('WINE_CATEGORY_WITHOUT_TYPE', default=[
-        'Напитки',
-    ])
+    wine_category_without_type = os.getenv(
+        'WINE_CATEGORY_WITHOUT_TYPE',
+        default=[
+            'Напитки',
+        ]
+    )
 
     all_wines = pandas.read_excel(
-        wines_data,
+        wines_assortment,
         sheet_name="Лист1",
         keep_default_na=False
     )
