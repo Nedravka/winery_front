@@ -10,10 +10,6 @@ from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-WINERY_FOUNDATION_YEAR = 1920
-WINE_CATEGORY_WITHOUT_TYPE = 'Напитки'
-
-
 def get_winery_age(foundation_year):
     winery_years = datetime.now().year - foundation_year
     if re.match(r'\d*(1\d)$', str(winery_years)):
@@ -29,6 +25,10 @@ if __name__ == '__main__':
 
     load_dotenv()
     wines_data = os.getenv('WINES_DATA', default='wines_test_data.xlsx')
+    winery_foundation_year = os.getenv('WINERY_FOUNDATION_YEAR', default=1920)
+    wine_category_without_type = os.getenv('WINE_CATEGORY_WITHOUT_TYPE', default=[
+        'Напитки',
+    ])
 
     all_wines = pandas.read_excel(
         wines_data,
@@ -56,9 +56,9 @@ if __name__ == '__main__':
     template = env.get_template('template.html')
 
     rendered_page = template.render(
-        winery_years=get_winery_age(WINERY_FOUNDATION_YEAR),
+        winery_years=get_winery_age(winery_foundation_year),
         categorized_wines=categorized_wines,
-        no_type=WINE_CATEGORY_WITHOUT_TYPE,
+        no_type=wine_category_without_type,
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
